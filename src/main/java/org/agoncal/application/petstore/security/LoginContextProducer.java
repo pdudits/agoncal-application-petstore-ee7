@@ -7,7 +7,10 @@ import javax.inject.Inject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import javax.servlet.ServletContext;
 
 /**
  * @author blep
@@ -23,6 +26,9 @@ public class LoginContextProducer {
 
     @Inject
     private SimpleCallbackHandler callbackHandler;
+    
+    @Inject
+    ServletContext ctx;
 
     // ======================================
     // =          Business methods          =
@@ -30,9 +36,10 @@ public class LoginContextProducer {
 
     @Produces
     public LoginContext produceLoginContext(@ConfigProperty("loginConfigFile") String loginConfigFileName,
-                                            @ConfigProperty("loginModuleName") String loginModuleName) throws LoginException, URISyntaxException {
+                                            @ConfigProperty("loginModuleName") String loginModuleName) throws LoginException, URISyntaxException, MalformedURLException {
 
-        System.setProperty("java.security.auth.login.config", new File(LoginContextProducer.class.getResource(loginConfigFileName).toURI()).getPath());
+        final URI loginConfig = ctx.getResource("/WEB-INF/classes/"+loginConfigFileName).toURI();//LoginContextProducer.class.getResource(loginConfigFileName).toURI();
+        System.setProperty("java.security.auth.login.config", new File(loginConfig).getPath());
 
         try {
             return new LoginContext(loginModuleName, callbackHandler);

@@ -1,20 +1,20 @@
 package org.agoncal.application.petstore.model;
 
-import org.agoncal.application.petstore.constraint.Login;
-import org.agoncal.application.petstore.exception.ValidationException;
-import org.hibernate.validator.constraints.Email;
-import sun.misc.BASE64Encoder;
+import java.io.Serializable;
+import java.security.MessageDigest;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import java.security.MessageDigest;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import org.agoncal.application.petstore.constraint.Email;
+import org.agoncal.application.petstore.constraint.Login;
+import org.agoncal.application.petstore.exception.ValidationException;
+import sun.misc.BASE64Encoder;
 
 /**
  * @author Antonio Goncalves

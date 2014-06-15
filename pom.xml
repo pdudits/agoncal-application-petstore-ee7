@@ -41,6 +41,8 @@
         <version.jrebel>1.1.5</version.jrebel>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <it.surefire.argLine>-XX:MaxPermSize=256m</it.surefire.argLine>
     </properties>
 
     <dependencyManagement>
